@@ -1,0 +1,3 @@
+url1 = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen'
+url2 = 'https://news.google.com/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2pTdG9TX0RCR1JDUzN5TmNqU3hTZ0FQAQ?hl=en-US&gl=US&ceid=US%3Aen'
+url3 = 'https://news.google.com/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2pIa0xmUURCSHdlS1p1VXItNHpDZ0FQAQ?hl=en-US&gl=US&ceid=US%3Aen'

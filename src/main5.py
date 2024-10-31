@@ -19,6 +19,8 @@ print(identifier)
 article = soup.find('a', href=lambda x: x and identifier in x)
 print(article.prettify())
 
+article = soup.find('article', jsdata=lambda x: x and identifier in x)
+
 
 # Find the parent <div> of the <a> tag
 # sub_articles = article.find_all_next('article')

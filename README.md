@@ -22,7 +22,7 @@ Currently only chrome-driver is supported
 
 - Install Google Chrome if it is not already installed and create a simple profile 
 - Donwnload according to your system the [chrome driver](https://googlechromelabs.github.io/chrome-for-testing/)
-- Store it in a specific directory, open the driver and create a a simple profile
+- Store it in a specific directory, open the driver
 
 ## Find Necessary Paths 
 In examples folder, 3 python scripts are provided to help you set up the projet easily 

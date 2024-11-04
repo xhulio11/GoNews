@@ -1,3 +1,10 @@
+
+import sys
+import os
+
+# Add the absolute path of the src directory to sys.path
+sys.path.append(os.path.abspath("/home/xhulio/Desktop/Thesis/GNews/src"))
+
 import json 
 from google_news_api import *
 

@@ -2,8 +2,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
-from google_news_api import *
+import sys
+import os
 
+# Add the absolute path of the src directory to sys.path
+sys.path.append(os.path.abspath("/home/xhulio/Desktop/Thesis/GNews/src"))
+from google_news_api import *
 
 # Set up Selenium options
 chrome_options = Options()

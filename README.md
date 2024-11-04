@@ -32,7 +32,7 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   - Find path of the profile i.e ```C:\Users\user\AppData\Local\Google\Chrome\User Data```
     - The above path can be found easily running in chrome ```chrome://version/``` and look at <b> Profile Path </b>
   - Set up the paths correctly in ```examples/windows_run.py``` as shown
-    ```
+    ```python
        chrome_options.add_argument(r"--user-data-dir=C:\Users\user\AppData\Local\Google\Chrome\User Data")
        chrome_options.add_argument(r"--profile-directory=Profile 1") 
     ```
@@ -41,7 +41,7 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   - Find path of the profile i.e ```/home/user/.config/google-chrome/```
     - The above path can be found easily running in chrome ```chrome://version/``` and look at <b> Profile Path </b>
   - Set up the paths correctly in ```examples/windows_run.py``` as shown
-    ```
+    ```python
        chrome_options.add_argument(r"--user-data-dir=/home/user/Downloads/chromedriver-linux64/chromedriver")
        chrome_options.add_argument(r"--profile-directory=Profile 1") 
     ```

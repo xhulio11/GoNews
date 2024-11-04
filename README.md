@@ -62,8 +62,8 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   # Set up Selenium options
   chrome_options = Options()
   
-  service = Service('/home/xhulio/Downloads/chromedriver-linux64/chromedriver')  # Path to ChromeDriver
-  chrome_options.add_argument(r"--user-data-dir=/home/xhulio/.config/google-chrome/")  # Root directory for Chrome user data
+  service = Service('/home/user/Downloads/chromedriver-linux64/chromedriver')  # Path to ChromeDriver
+  chrome_options.add_argument(r"--user-data-dir=/home/user/.config/google-chrome/")  # Root directory for Chrome user data
   chrome_options.add_argument(r"--profile-directory=Profile 1")  # The profile folder you created
   
   # Initialize WebDriver for Chrome 

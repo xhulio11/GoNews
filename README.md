@@ -4,7 +4,7 @@ This is a simple Google News Api. It's main goals is to receive related articles
 ## Table of Contents
 - [GoNews Installation](#gonews-installation)
 - [Browser Installation](#browser-installation)
-- [Use Examples](#use-examples)
+- [Use of Examples](#use-of-examples)
 - [Features](#features)
 - [Contributing](#contributing)
 - [License](#license)
@@ -14,6 +14,7 @@ This is a simple Google News Api. It's main goals is to receive related articles
 Instructions on how to install and set up your project. For example:
 ```bash
 git clone https://github.com/xhulio11/GoNews.git
+cd GoNews
 python install -r requirements.txt
 ```
 ## Browser Installation

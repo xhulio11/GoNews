@@ -1,18 +1,17 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import feedparser
+from selenium.webdriver.common.by import By
 from newspaper import Article
 from bs4 import BeautifulSoup
-import json,time
 from constants import * 
+import feedparser
+import json
+import time
 
 
 class GoNews():
     
+
     def __init__(self, language="english", country="United States"):
 
         # Check validity of language 
@@ -100,33 +99,27 @@ class GoNews():
         return news_by_topic
 
 
-    def read_articles(self, topics, browser_path, user_data_dir, profile):
-        # Set up Selenium options
-        chrome_options = Options()
-        # Use the custom user profile (make sure to use the correct profile path)
-        chrome_options.add_argument(user_data_dir)  # Root directory for Chrome user data
-        chrome_options.add_argument(profile)  # The profile folder you created
+    def read_articles(self, topics, driver, write_json=False, max_topics = 10):
 
-        service = Service(browser_path)  # Path to ChromeDriver
-
-        # Initialize WebDriver for Chrome
-        driver = webdriver.Chrome(service=service, options=chrome_options)
         articles_by_topic = []
-        i = 0
-        with open('artilces.json', 'w') as file: 
-            for topic in topics:
+
+        with open('articles.json', 'w', encoding='UTF-8') as file: 
+            
+            for counter, topic in enumerate(topics):
+                
                 articles_content = []
 
                 for url in topic:
-                    print(i)
-                    i += 1
-                    driver.get(url)      
+
+                    # Get content using browser 
+                    driver.get(url) 
+
                     try:
-                        # Wait for the page to fully load (customize as needed)
+                        # Wait for the page to fully load 
                         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))  # Wait for the body tag
 
-                        # Optional: Add a delay to mimic human behavior
-                        time.sleep(2)  # Sleep for 2 seconds
+                        # Add a delay to mimic human behavior
+                        time.sleep(2) 
 
                         # Get the page source
                         page_content = driver.page_source
@@ -137,19 +130,28 @@ class GoNews():
                         article.parse()
 
                     except Exception as e:
-                        print(f"An error occurred: {e}")
-                    time.sleep(10)
+                        print(f"An error occurred while loading the page: {e}")
+                        json.dump(articles_by_topic, file, ensure_ascii=False, )
+                        return 
+
                     artilce_title = article.title
                     article_text = article.text
                     articles_content.append(artilce_title + '\n' + article_text)
-
+                    
+                    # Mimic human behavior 
+                    time.sleep(10)
+                                
                 articles_by_topic.append(articles_content)
-                if i == 20: break
 
-            json.dump(articles_by_topic, file)
+                # This counter is used to keep track of max number of news retrieved 
+                counter += 1 
+
+                if counter == max_topics:
+                    if write_json: 
+                        json.dump(articles_by_topic, file, ensure_ascii=False, ) # Store the content in a file                   
+                    driver.quit() # quit the browswer 
+                    break 
             
-        # quit Browser
-        driver.quit()
 
         return articles_by_topic
     

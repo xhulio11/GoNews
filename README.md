@@ -70,11 +70,11 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   driver = webdriver.Chrome(service=service, options=chrome_options)
   google_api = GoNews(language='english', country='United States')
 
-  url_news = google_api.get_news_by_topic(topic='POLITICS')
-  content = google_api.read_articles(url_news, driver, write_json=True, max_topics=1)
   ```
 
-
+  ```python
+  url_news = google_api.get_news_by_topic(topic='POLITICS')
+  ```
   ```url_news``` is a list of dictionaries. Every dictionary contains different sources of the same news 
   ```json
    [{
@@ -86,7 +86,9 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   }
   ```
 
-  
+  ``` python
+  content = google_api.read_articles(url_news, driver, write_json=True, max_topics=1)
+  ```
   ```content``` is a list of lists. Every list contais the content of the visited urls above
   ```json
     [

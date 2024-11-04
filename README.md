@@ -92,6 +92,6 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
     [
       ["content 1", "content 2", "more content"],
       ["content 3", "content 4", "more content"]
-      // more arrays go here
+      ["// more arrays go here"]
     ]
   ```

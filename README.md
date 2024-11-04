@@ -6,11 +6,8 @@ This is a simple Google News Api. It's main goals is to receive related articles
 - [Browser Installation](#browser-installation)
 - [Find Necessary Paths](#find-necessary-paths)
 - [Full Example](#full-example)
-  - [get_news_by_topic](#get-news-by-topic)
-  - [read_articles](#read-articles)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+  - [get_news_by_topic](#get_news_by_topic)
+  - [read_articles](#read_articles)
 
 ## GoNews Installation 
 Instructions on how to install and set up your project. For example:

@@ -4,85 +4,100 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import feedparser
 from newspaper import Article
-from gnews import GNews 
-import requests
 from bs4 import BeautifulSoup
 import json,time
+from constants import * 
 
-WORLD_URL = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx1YlY4U0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=US&ceid=US%3Aen'
-GOOGLE_URL_TOPICS = 'https://news.google.com/topics/'
-GOOGLE_URL_READ = 'https://news.google.com/read/'
 
-class GoNews(GNews):
+class GoNews():
     
-    def __init__(self, language="en", country="US", max_results=100, period=None, start_date=None, end_date=None,
-                 exclude_websites=None, proxy=None):
+    def __init__(self, language="english", country="United States"):
 
-        # Inherit from the Gnews module 
-        super().__init__(language, country, max_results, period, start_date, end_date,
-                 exclude_websites, proxy)
+        # Check validity of language 
+        if language not in AVAILABLE_LANGUAGES: 
+            raise Exception(f'The language: {language} you provided does not exist.')
+        else: 
+            self.language = language 
+
+        # Check validity of country 
+        if country not in AVAILABLE_COUNTRIES: 
+            raise Exception(f'The country: {country} you provided does not exist.')
+        else: 
+            self.country = country 
+
+        self.default_query = "hl=en-US&gl=US&ceid=US%3Aen"    
+
+
+    def create_url(self, code=None, query_parameter=None):
         
-
-    def get_related_news_by_topic(self, url=WORLD_URL, topic = 'World'):
-        
-        # Take Google News Page 
-        page = requests.get(url)
-        soup = BeautifulSoup(page.content, "html.parser")
-        
-        # Get main articles on the choosen topic  
-        news_by_topic = self.get_news_by_topic(topic)
-
-        # This list will store all the articles. 
-        # Every element will be another list with articles in a json format 
-        all_articles = []
-        for article in news_by_topic: 
-            # Take the url of the article 
-            url = article['url']
-
-            # url example: https://news.google.com/rss/articles/, 
-            # article_code: {CBMiz ... dzFDb3I1THpxM3RqOWlhQQ} ,
-            # article_code_ending = {?oc=5&hl=en-US&gl=US&ceid=US:en}
-            # Find identifier 
-
-            first_split = url.split("/articles/")[1]
-            article_code = first_split.split("?")[0]
-            article_code_ending = '?' + first_split.split("?")[1]
-
-            # find the current main article 
-            tag_article = soup.find('article', jsdata=lambda x: x and article_code in x)
-
-            # find the div that contains similar articles 
-            div = tag_article.find_next_sibling('div')
-
-            # No other articles are found 
-            if div is None: 
-                continue
-
-            # Get the articles 
-            similar_articles = div.find_all('article')
+        # Set the proper url based on the selection of Main topics (WORLD, BUISNESS, ...) or sections (POLITICS, SPORTS ..)
+        try: 
+            # Check the topic to be used
+            if code in TOPICS: 
+                url = GOOGLE_NEWS_URL + '/news/rss/headlines/section/topics/' + code + '?' + query_parameter
+                return url 
             
-            # Add the main article 
-            similar_article_list = [article]    
- 
-            # Loop through the articles 
-            for secondary_article in similar_articles: 
-                # Get important info 
-                jsdata = secondary_article.get('jsdata')
+            elif code in SECTIONS.keys():
+                url = GOOGLE_NEWS_URL + '/rss/topics/' + SECTIONS[code] + '?' +  query_parameter
+                return url      
+        except:
+            print("ERROR: Some variable is not defined properly for the creation of the url")
 
-                # Split it appropriatly
-                code = jsdata.split(';')[1]
 
-                # Create url
-                created_url =  GOOGLE_URL_READ + code + article_code_ending  
-                
-                # Add to the list 
-                similar_article_list.append(created_url)
-            
-            all_articles.append(similar_article_list)
+    def get_news_by_topic(self, topic="POLITICS"):
+        # Get News by main provided topics in google news site 
+        url = self.create_url(code=topic, query_parameter=self.default_query)
+        # Take the XML content 
+        feed = feedparser.parse(url,)
+
+        # Get the entries: All the news with their related news by other sources 
+        entries = feed.entries
         
-        return all_articles
-    
+        """
+        list: news_by_topic
+        
+        This list will contain in every positin a dictionary of reated news 
+        [
+        {"title 1": "https://news.google.com/...", "title 2": "https://news.google.com/..."}, 
+        {"title 3": "https://news.google.com/...", "title 4": "https://news.google.com/..."}, 
+        ...]
+        
+        """
+        news_by_topic = [None for _ in entries]
+
+        for i, entry in enumerate(entries): 
+
+            # Get main title and the url 
+            title = entry['title']
+            
+            url = entry["links"][0]['href']
+            
+            # Add the first article in the current position
+            news_by_topic[i] = {url:title}
+
+            # Parse the html content to extract the other related news 
+            # Get the key:summary which is html content
+            summary = entry['summary']
+            
+            # Create a BeautifulSoup instant to parse 
+            content = BeautifulSoup(summary, 'html.parser')
+            
+            # Every li tag contains href: link, target: title 
+            a_tags = content.find_all('a')
+            j = 0 
+            for a_tag in a_tags:
+
+                # Get url and title of current article 
+                url = a_tag.get('href')
+                title = a_tag.get_text(strip=True)  # Extracts the text content
+
+                # Add it in the dictionary 
+                news_by_topic[i][url] = title 
+
+        return news_by_topic
+
 
     def read_articles(self, topics, browser_path, user_data_dir, profile):
         # Set up Selenium options

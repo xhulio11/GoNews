@@ -1,6 +1,4 @@
-import feedparser
 import json 
-from bs4 import BeautifulSoup
 from google_news_api import *
 
 google_api = GoNews(language='greek', country='Greece')

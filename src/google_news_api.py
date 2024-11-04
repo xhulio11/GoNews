@@ -19,16 +19,17 @@ class GoNews():
         if language not in AVAILABLE_LANGUAGES: 
             raise Exception(f'The language: {language} you provided does not exist.')
         else: 
-            self.language = language 
+            self.language = AVAILABLE_LANGUAGES[language] 
 
         # Check validity of country 
         if country not in AVAILABLE_COUNTRIES: 
             raise Exception(f'The country: {country} you provided does not exist.')
         else: 
-            self.country = country 
+            self.country = AVAILABLE_COUNTRIES[country]
 
-        self.default_query = "hl=en-US&gl=US&ceid=US%3Aen"    
-
+        # example of query: "hl=en-US&gl=US&ceid=US%3Aen" 
+        self.query = "hl=" + self.language + "-" + self.country + "&gl=" + self.country + "&ceid=" +self.country + "%3A" + self.language
+    
 
     def create_url(self, code=None, query_parameter=None):
         
@@ -48,7 +49,7 @@ class GoNews():
 
     def get_news_by_topic(self, topic="POLITICS"):
         # Get News by main provided topics in google news site 
-        url = self.create_url(code=topic, query_parameter=self.default_query)
+        url = self.create_url(code=topic, query_parameter=self.query)
         # Take the XML content 
         feed = feedparser.parse(url,)
 

@@ -6,6 +6,8 @@ This is a simple Google News Api. It's main goals is to receive related articles
 - [Browser Installation](#browser-installation)
 - [Find Necessary Paths](#find-necessary-paths)
 - [Full Example](#full-example)
+  - [get_news_by_topic](#get-news-by-topic)
+  - [read_articles](#read-articles)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
@@ -71,7 +73,7 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   google_api = GoNews(language='english', country='United States')
 
   ```
-
+  ### get_news_by_topic
   ```python
   # a list of dictionaries. Every dictionary contains different sources of the same news
   url_news = google_api.get_news_by_topic(topic='POLITICS')
@@ -85,7 +87,7 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
     "...": "More data here as a placeholder"
   }
   ```
-
+  ### read_articles
   ``` python
   # a list of lists. Every list contais the content of the visited urls above
   # url_news must have been extracted first 

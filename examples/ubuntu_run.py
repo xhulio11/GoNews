@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support import expected_conditions as EC
 import sys
 import os
 
@@ -20,5 +19,5 @@ chrome_options.add_argument(r"--profile-directory=Profile 1")  # The profile fol
 driver = webdriver.Chrome(service=service, options=chrome_options)
 google_api = GoNews(language='greek', country='Greece')
 
-a = google_api.get_news_by_topic(topic='POLITICS')
-b = google_api.read_articles(a, driver, write_json=True, max_topics=1)
+url_news = google_api.get_news_by_topic(topic='POLITICS')
+content = google_api.read_articles(url_news, driver, write_json=True, max_topics=1)

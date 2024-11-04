@@ -17,7 +17,7 @@ cd GoNews
 python install -r requirements.txt
 ```
 ## Browser Installation
-Instructions on how to install and set up the browswer driver. 
+Instructions on how to install and set up the browser driver. 
 Currently only chrome-driver is supported 
 
 - Install Google Chrome if it is not already installed and create a simple profile 

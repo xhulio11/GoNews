@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from newspaper import Article
 from bs4 import BeautifulSoup
@@ -128,12 +129,18 @@ class GoNews():
                         article = Article('')
                         article.set_html(page_content)
                         article.parse()
+                    
+                    except TimeoutException:
+                        print("An error occurred while loading the page: Page load timed out.")
+                        # continue to the other url 
+                        continue 
 
                     except Exception as e:
                         print(f"An error occurred while loading the page: {e}")
                         json.dump(articles_by_topic, file, ensure_ascii=False, )
                         return 
 
+                    # Get the content of the article 
                     artilce_title = article.title
                     article_text = article.text
                     articles_content.append(artilce_title + '\n' + article_text)
@@ -148,11 +155,10 @@ class GoNews():
 
                 if counter == max_topics:
                     if write_json: 
-                        json.dump(articles_by_topic, file, ensure_ascii=False, ) # Store the content in a file                   
+                        json.dump(articles_by_topic, file, ensure_ascii=False) # Store the content in a file                   
                     driver.quit() # quit the browswer 
                     break 
             
-
         return articles_by_topic
     
         

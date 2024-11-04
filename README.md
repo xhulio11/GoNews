@@ -1,5 +1,5 @@
-# Project Name
-A brief description of what your project does and why it's useful.
+# GoNews 
+This is a simple Google News Api. 
 
 ## Table of Contents
 - [Installation](#installation)

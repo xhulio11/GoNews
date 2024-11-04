@@ -80,12 +80,18 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
    [{
   "https://news.google.com/rss/articles/CBMiowFBVV95cUxPdzZfMkhzZEZ4aC1NNllnN3BDRkxwT1Bodzgwb29ldHBtYXFoU2lOVWM0Y01PZEdNM21XeHVFRUJUUHZDMU0zSEIyOXpzekQxT0hiVTFRZjdpdXlQdVpHMGVIenJsM01MSHRMcEZNN09UZzdLZUk3dk9rLTlZQU92dy01b0JQcmJzZnVDc2VJR3U2WU8wZWlvbHNwTE1UYXN5bFFB0gGYAUFVX3lxTE1CeE5NekFIY1YtNVhHTkY5TjdpS0diVmlOcGhBblI1TEpiWDhUSHA1enJHZW5VdGlLc0xNc1Nnck1EZlB6WlAyQXd6LWtIUjF5QW1uaDNJMm9VM0lHeVVELUUxSXo3R0FFSHpUTkNuN19pY1MzcEFhamY3bUczYnh5bjZQUlhLMmE2amRPUXROc21jeTFEWjZJ?oc=5": "Pawan Sets Up Wing To 'Protect Sanatana Dharma'..",
   "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPQnFXRlJrRS1rMHRDSGdZbVdyaUtzQzRzaDhQaFB2bFVsZFVVM3BjdG1GaVRVVENQUk1Zb2FaYzRpNVNJZlZrLVNRY2JBQmJjeWlVaVZZdGtYbHNrV0RwMXFpZXpZWUtRR0pxaGlDaGJiN1VGMzA3bGhBbnU0T1l5b09uYVQ5ampoZWVXa0NpenVSRDdwMEx4Z3Z1d2NPZmJQaHlNdmdRd19QSUFTTk9saUJPWUZqeGRvckw5ZWx4bDExakNhV3FuLUd0Wmc4bk5mci1nNXh5LXdSeUhud096NENmMHVXNHlnRXE2TEwwMA?oc=5": "Pawan Kalyan starts Sanatana Dharma protection wing in Janasena party: ‘Respect all religion but…’",
-  },, ... 
+  },
+  {
+    "...": "More data here as a placeholder"
+  }
   ```
 
   
   ```content``` is a list of lists. Every list contais the content of the visited urls above
   ```json
-  [['content 1', 'content 2', ...], ['content 3', 'content 4', ...], ...]
+    [
+      ["content 1", "content 2", "more content"],
+      ["content 3", "content 4", "more content"]
+      // more arrays go here
+    ]
   ```
-  

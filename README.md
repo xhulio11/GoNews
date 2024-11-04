@@ -74,6 +74,7 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   content = google_api.read_articles(url_news, driver, write_json=True, max_topics=1)
   ```
 
+
   ```url_news``` is a list of dictionaries. Every dictionary contains different sources of the same news 
   ```json
   url_news = 
@@ -82,8 +83,10 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
   "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPQnFXRlJrRS1rMHRDSGdZbVdyaUtzQzRzaDhQaFB2bFVsZFVVM3BjdG1GaVRVVENQUk1Zb2FaYzRpNVNJZlZrLVNRY2JBQmJjeWlVaVZZdGtYbHNrV0RwMXFpZXpZWUtRR0pxaGlDaGJiN1VGMzA3bGhBbnU0T1l5b09uYVQ5ampoZWVXa0NpenVSRDdwMEx4Z3Z1d2NPZmJQaHlNdmdRd19QSUFTTk9saUJPWUZqeGRvckw5ZWx4bDExakNhV3FuLUd0Wmc4bk5mci1nNXh5LXdSeUhud096NENmMHVXNHlnRXE2TEwwMA?oc=5": "Pawan Kalyan starts Sanatana Dharma protection wing in Janasena party: ‘Respect all religion but…’",
   },, ... 
   ```
+
+  
   ```content``` is a list of lists. Every list contais the content of the visited urls above
-  ```python
+  ```json
   content = [['content 1', 'content 2', ...], ['content 3', 'content 4', ...], ...]
   ```
   

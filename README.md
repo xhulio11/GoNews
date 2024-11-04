@@ -29,4 +29,4 @@ In examples folder, 3 python scripts are provided to help you set up the projet 
 - Windows User
   - Find path of the driver i.e: ```C:\\Users\\user\\OneDrive\\Desktop\\Thesis\\chromedriver-win64\\chromedriver.exe```
   - Find path of the profile i.e ```C:\Users\user\AppData\Local\Google\Chrome\User Data```
-  - The above path can be found easily running in chrome ```chrome://version/``` and look at <b> Profile Path <\b> 
+  - The above path can be found easily running in chrome ```chrome://version/``` and look at <b> Profile Path </b> 

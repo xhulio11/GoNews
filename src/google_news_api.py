@@ -51,7 +51,7 @@ class GoNews():
         # Get News by main provided topics in google news site 
         url = self.create_url(code=topic, query_parameter=self.query)
         # Take the XML content 
-        feed = feedparser.parse(url,)
+        feed = feedparser.parse(url)
 
         # Get the entries: All the news with their related news by other sources 
         entries = feed.entries

@@ -12,6 +12,7 @@ from google_news_api import *
 # Set up Selenium options
 chrome_options = Options()
 service = Service('C:\\Users\\xhuli\\OneDrive\\Desktop\\Thesis\\chromedriver-win64\\chromedriver.exe')  # Path to GeckoDriver
+chrome_options.add_argument('--disable-notifications')
 chrome_options.add_argument(r"--user-data-dir=C:\Users\xhuli\AppData\Local\Google\Chrome\User Data")  # Root directory for Chrome user data
 chrome_options.add_argument(r"--profile-directory=Profile 1")  # The profile folder you created
 

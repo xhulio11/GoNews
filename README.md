@@ -1,5 +1,5 @@
 # GoNews 
-This is a simple Google News Api. It's main goals is to receive related articles given a provided topic. 
+This is a simple Google News Api. It's main goal is to receive related articles given a provided topic. 
 
 ## Table of Contents
 - [GoNews Installation](#gonews-installation)

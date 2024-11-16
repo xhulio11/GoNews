@@ -25,7 +25,7 @@ Currently only chrome-driver is supported
 - Store it in a specific directory, open the driver
 
 ## Find Necessary Paths 
-In <b>examples</b> folder, 3 python scripts are provided to help you set up the projet easily 
+In <b>examples</b> folder, 2 python scripts are provided to help you set up the projet easily 
 - Windows User
   - Find path of the driver i.e: ```C:\\Users\\user\\OneDrive\\Desktop\\Thesis\\chromedriver-win64\\chromedriver.exe```
   - Find path of the profile i.e ```C:\Users\user\AppData\Local\Google\Chrome\User Data```

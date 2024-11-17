@@ -109,8 +109,8 @@ In <b>examples</b> folder, 2 python scripts are provided to help you set up the 
   ```
   ```json
     [
-      ["content 1", "content 2", "more content"],
-      ["content 3", "content 4", "more content"]
+      [{"content 1", "source 1"},{"content 1", "source 2"},{"content 3", "source 3"}],
+      [{"content 4", "source 4"},{"content 5", "source 5"},{"content 6", "source 6"}]
       ["// more arrays go here"]
     ]
   ```

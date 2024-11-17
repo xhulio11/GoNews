@@ -105,7 +105,7 @@ In <b>examples</b> folder, 2 python scripts are provided to help you set up the 
   ``` python
   # a list of lists. Every list contais the content of the visited urls above
   # url_news must have been extracted first 
-  content = google_api.read_articles(url_news, driver, write_json=True, max_topics=1)
+  content = google_api.read_articles(url_news, driver, write_json=True, max_topics=1, hard_check_article=True)
   ```
   ```json
     [

@@ -81,8 +81,21 @@ In <b>examples</b> folder, 2 python scripts are provided to help you set up the 
   ```
   ```json
    [{
-  "https://news.google.com/rss/articles/CBMiowFBVV95cUxPdzZfMkhzZEZ4aC1NNllnN3BDRkxwT1Bodzgwb29ldHBtYXFoU2lOVWM0Y01PZEdNM21XeHVFRUJUUHZDMU0zSEIyOXpzekQxT0hiVTFRZjdpdXlQdVpHMGVIenJsM01MSHRMcEZNN09UZzdLZUk3dk9rLTlZQU92dy01b0JQcmJzZnVDc2VJR3U2WU8wZWlvbHNwTE1UYXN5bFFB0gGYAUFVX3lxTE1CeE5NekFIY1YtNVhHTkY5TjdpS0diVmlOcGhBblI1TEpiWDhUSHA1enJHZW5VdGlLc0xNc1Nnck1EZlB6WlAyQXd6LWtIUjF5QW1uaDNJMm9VM0lHeVVELUUxSXo3R0FFSHpUTkNuN19pY1MzcEFhamY3bUczYnh5bjZQUlhLMmE2amRPUXROc21jeTFEWjZJ?oc=5": "Pawan Sets Up Wing To 'Protect Sanatana Dharma'..",
-  "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPQnFXRlJrRS1rMHRDSGdZbVdyaUtzQzRzaDhQaFB2bFVsZFVVM3BjdG1GaVRVVENQUk1Zb2FaYzRpNVNJZlZrLVNRY2JBQmJjeWlVaVZZdGtYbHNrV0RwMXFpZXpZWUtRR0pxaGlDaGJiN1VGMzA3bGhBbnU0T1l5b09uYVQ5ampoZWVXa0NpenVSRDdwMEx4Z3Z1d2NPZmJQaHlNdmdRd19QSUFTTk9saUJPWUZqeGRvckw5ZWx4bDExakNhV3FuLUd0Wmc4bk5mci1nNXh5LXdSeUhud096NENmMHVXNHlnRXE2TEwwMA?oc=5": "Pawan Kalyan starts Sanatana Dharma protection wing in Janasena party: ‘Respect all religion but…’",
+  "https://news.google.com/rss/articles/CBMingFBVV95cUxQMFJiY24zcVcwWkFGbnRtckFtSFpITkxzVWZHeWpHVlp4azhtUDhvTjFRUjM5eUl5QXQ2dTN5U2tIb2s1T1RjSWdwY1dlSDh5Y2d1VkE3NHd1SFFkdEktNU9vZ2V1UTZKWXVpeWZPRGRySm5ENVZ3TFFvUXZjVXV4aENqSmFUZkRPQ25Pdjhnb3FHRWFiSDc2NmJwTHNwQQ?oc=5": {
+   "source": "Fortune",
+   "title": "Cathie Wood says Elon Musk will succeed in his audit of the federal government because he has 'more proprietary data' than anyone"
+  },
+  "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9CTGlWVkhNUkFEWE4zYkNIdzR1cW1RSGJFS1ZYWHh1R3I5YXlfeU1vb3FhdFU5SkJkRWJGcFJmSV9uMWkzemNfcnhVaE40SjNLU1l4WHdn?oc=5": {
+   "source": "Fox News",
+   "title": "Dem senator reveals his amusement over appointment of Musk, Ramaswamy for DOGE"
+  },
+  "https://news.google.com/rss/articles/CBMirgFBVV95cUxNMW1WXzg4cG9peXpFVnlnVTUyU1pGdWhYYlNqbWQ5QmQxejgzQXlRdkR1UVoxbXRabDZBWEtjX19DT2hMeUNEZVlxSGpuSy01Njdub1pKdXpycEN1SV9fRDVtWjJncE91d01acVR3bmE2QkpNdXZVV19fUEkzQUh6amVqN0ZGTVNnakJlTUNnS3N5SlRnY09XVHlpc0l6cHd6TjhkdlhLcDNPQ2JMaXc?oc=5": {
+   "source": "The New York Times",
+   "title": "What Can the Department of Government Efficiency Do?"
+  },
+  "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOeUhQWWJZNF9wN015OHJ1czB1S2t6cVVKcXVVbHhvN2FyY0h6SldLWkpNck5URFZpSUlwSEh1eXAyenoxQUVodTBGYk5Nc2YwV1VxZkR4Q3J0WjQ3Wl9rRWlsWEp0UkhWSlFXN2llQnVxclJENzJBdV94WnJDR0V6M0VmQ0xyYlAxWUU3bGIwZXZPS09NemtCa09kVHJ4bjVsaUI4eHNYbVJObGNCenpXRTNOQkdOOHhM?oc=5": {
+   "source": "USA TODAY",
+   "title": "Before Elon Musk, Trump tapped another billionaire to cut costs. It didn't end well"
   },
   {
     "...": "More data here as a placeholder"

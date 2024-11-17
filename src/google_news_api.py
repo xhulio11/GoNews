@@ -48,8 +48,10 @@ class GoNews():
 
 
     def get_news_by_topic(self, topic="POLITICS"):
+
         # Get News by main provided topics in google news site 
         url = self.create_url(code=topic, query_parameter=self.query)
+
         # Take the XML content 
         feed = feedparser.parse(url)
 
@@ -59,24 +61,16 @@ class GoNews():
         """
         list: news_by_topic
         
-        This list will contain in every positin a dictionary of reated news 
+        This list will contain in every positin a dictionary of related news 
         [
-        {"title 1": "https://news.google.com/...", "title 2": "https://news.google.com/..."}, 
-        {"title 3": "https://news.google.com/...", "title 4": "https://news.google.com/..."}, 
+        {"https://news.google.com/...":{"source":source, "title":title},"https://news.google.com/...":{"source":source, "title":title}, ...}, 
+        {"https://news.google.com/...":{"source":source, "title":title},"https://news.google.com/...":{"source":source, "title":title}, ...}, 
         ...]
         
         """
-        news_by_topic = [None for _ in entries]
+        news_by_topic = [{} for _ in entries]
 
         for i, entry in enumerate(entries): 
-
-            # Get main title and the url 
-            title = entry['title']
-            
-            url = entry["links"][0]['href']
-            
-            # Add the first article in the current position
-            news_by_topic[i] = {url:title}
 
             # Parse the html content to extract the other related news 
             # Get the key:summary which is html content
@@ -85,17 +79,37 @@ class GoNews():
             # Create a BeautifulSoup instant to parse 
             content = BeautifulSoup(summary, 'html.parser')
             
-            # Every li tag contains href: link, target: title 
-            a_tags = content.find_all('a')
-            j = 0 
-            for a_tag in a_tags:
+            # Find all list content 
+            list_items = content.find_all('li')
 
-                # Get url and title of current article 
-                url = a_tag.get('href')
-                title = a_tag.get_text(strip=True)  # Extracts the text content
+            if list_items:  # If <li> elements exist
+                # Loop through each <li> and extract the href, title, and source
+                for li in list_items:
+                    # Extract the href
+                    link = li.find('a')['href'] if li.find('a') else None
+                    
+                    # Extract the title
+                    title = li.find('a').text.strip() if li.find('a') else None
+                    
+                    # Extract the source
+                    source = li.find('font').text.strip() if li.find('font') else None
 
-                # Add it in the dictionary 
-                news_by_topic[i][url] = title 
+                    if link:  # Ensure the link is valid before adding to the dictionary
+                        news_by_topic[i][link] = {"source": source, "title": title}
+            else:  # If no <li> elements, check for a single <a> tag
+                single_a = content.find('a')
+                
+                if single_a:
+                    # Extract the href
+                    link = single_a['href']
+                    
+                    # Extract the title
+                    title = single_a.text.strip()
+                    
+                    # Since there's no <li>, we may not have a source font tag
+                    source = content.find('font').text.strip() if content.find('font') else None
+                    
+                    news_by_topic[i][link] = {"source": source, "title": title}
 
         return news_by_topic
 
@@ -129,7 +143,7 @@ class GoNews():
                         article = Article('')
                         article.set_html(page_content)
                         article.parse()
-                    
+
                     except TimeoutException:
                         print("An error occurred while loading the page: Page load timed out.")
                         # continue to the other url 
@@ -160,5 +174,3 @@ class GoNews():
                     break 
             
         return articles_by_topic
-    
-        

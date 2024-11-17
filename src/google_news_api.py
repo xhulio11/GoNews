@@ -123,26 +123,25 @@ class GoNews():
                 print("2.Missing or invalid title")
                 return False
 
-            # # Authors check
-            # if not article.authors:  # Authors list is empty
-            #     print("2.Missing authors")
-            #     return False
-
-            # # Publish date check
-            # if not article.publish_date:  # Publish date is None
-            #     print("2.Missing publish date")
-            #     return False
-
             # Length check
             if len(article.text) < 100:
                 print("2.Content too short")
                 return False
 
-            # # Irrelevant content keywords
-            # irrelevant_keywords = ["log in", "subscribe", "video ad", "join in on the fun"]
-            # if any(keyword in article.text.lower() for keyword in irrelevant_keywords):
-            #     return False, "Irrelevant content"
+            # Keyword filtering (check for terms like "terms of use", "cookies", etc.)
+            disallowed_keywords = [
+                "terms of use", "privacy policy", "cookies", 
+                "about us", "contact us", "login", "sign up"
+            ]
+            if any(keyword.lower() in article.text.lower() for keyword in disallowed_keywords):
+                print("2. Disallowed content keywords found")
+                return False
 
+            # Boilerplate or repetitive content check
+            if len(set(article.text.split())) / len(article.text.split()) < 0.5:
+                print("2. High repetition or boilerplate content detected")
+                return False
+            
             # Paragraph structure
             paragraphs = article.text.split("\n")
             if len([p for p in paragraphs if len(p.split()) > 10]) < 2:

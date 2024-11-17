@@ -112,9 +112,54 @@ class GoNews():
                     news_by_topic[i][link] = {"source": source, "title": title}
 
         return news_by_topic
+    
 
+    def hard_check_article(self, article): 
+            
+            print("1.Checking Articles Validity")
 
-    def read_articles(self, topics, driver, write_json=False, max_topics = 10):
+            # Title check
+            if not article.title or len(article.title.strip()) < 5:
+                print("2.Missing or invalid title")
+                return False
+
+            # # Authors check
+            # if not article.authors:  # Authors list is empty
+            #     print("2.Missing authors")
+            #     return False
+
+            # # Publish date check
+            # if not article.publish_date:  # Publish date is None
+            #     print("2.Missing publish date")
+            #     return False
+
+            # Length check
+            if len(article.text) < 100:
+                print("2.Content too short")
+                return False
+
+            # # Irrelevant content keywords
+            # irrelevant_keywords = ["log in", "subscribe", "video ad", "join in on the fun"]
+            # if any(keyword in article.text.lower() for keyword in irrelevant_keywords):
+            #     return False, "Irrelevant content"
+
+            # Paragraph structure
+            paragraphs = article.text.split("\n")
+            if len([p for p in paragraphs if len(p.split()) > 10]) < 2:
+                print("2.Insufficient paragraph structure")
+                return False
+
+            # Media-only check
+            if article.movies and len(article.text) < 100:
+                print("2.Media-only content")
+                return False
+
+            # If all checks pass
+            print("2.Valid article")
+            return True
+    
+
+    def read_articles(self, topics, driver, write_json=False, hard_check_article=False, max_topics = 10):
 
         articles_by_topic = []
 
@@ -143,6 +188,10 @@ class GoNews():
                         article = Article('')
                         article.set_html(page_content)
                         article.parse()
+
+                        # Check articles validity 
+                        if hard_check_article and not self.hard_check_article(article): 
+                            continue 
 
                     except TimeoutException:
                         print("An error occurred while loading the page: Page load timed out.")
@@ -178,8 +227,10 @@ class GoNews():
 
                 if counter == max_topics:
                     if write_json: 
-                        json.dump(articles_by_topic, file, ensure_ascii=False, indent=1) # Store the content in a file                   
-                    driver.quit() # quit the browswer 
+                        # Store the content in a file 
+                        json.dump(articles_by_topic, file, ensure_ascii=False, indent=1)           
+
+                    driver.quit()
                     break 
-            
+        
         return articles_by_topic

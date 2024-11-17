@@ -24,6 +24,9 @@ Currently only chrome-driver is supported
 - Donwnload according to your system the [chrome driver](https://googlechromelabs.github.io/chrome-for-testing/)
 - Store it in a specific directory, open the driver
 
+* It is strongly recommended to install [I still don't care about cookies](https://chromewebstore.google.com/detail/i-still-dont-care-about-c/edibdbjcniadpccecjdfdjjppcpchdlm) extensions
+* to avoid cookies pop ups and receiving their text. 
+
 ## Find Necessary Paths 
 In <b>examples</b> folder, 2 python scripts are provided to help you set up the projet easily 
 - Windows User

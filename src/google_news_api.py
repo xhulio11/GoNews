@@ -8,7 +8,7 @@ from constants import *
 import feedparser
 import json
 import time
-
+import traceback
 
 class GoNews():
     
@@ -151,13 +151,22 @@ class GoNews():
 
                     except Exception as e:
                         print(f"An error occurred while loading the page: {e}")
+                        traceback.print_exc()
                         json.dump(articles_by_topic, file, ensure_ascii=False, )
                         return 
 
                     # Get the content of the article 
-                    artilce_title = article.title
+                    article_title = article.title
                     article_text = article.text
-                    articles_content.append(artilce_title + '\n' + article_text)
+
+                    # Retrieve the source from the topic dictionary
+                    article_source = topics[counter][url]["source"]
+
+                    # Append the parsed article content
+                    articles_content.append({
+                        "content": article_title + '\n' + article_text,
+                        "source": article_source
+                    })
                     
                     # Mimic human behavior 
                     time.sleep(10)
@@ -169,7 +178,7 @@ class GoNews():
 
                 if counter == max_topics:
                     if write_json: 
-                        json.dump(articles_by_topic, file, ensure_ascii=False) # Store the content in a file                   
+                        json.dump(articles_by_topic, file, ensure_ascii=False, indent=1) # Store the content in a file                   
                     driver.quit() # quit the browswer 
                     break 
             

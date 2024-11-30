@@ -126,6 +126,7 @@ class GoNews():
             # Length check
             if len(article.text) < 100:
                 print("2.Content too short")
+                print(article.text)
                 return False
 
             # Keyword filtering (check for terms like "terms of use", "cookies", etc.)
@@ -158,7 +159,7 @@ class GoNews():
             return True
     
 
-    def read_articles(self, topics, driver, write_json=False, hard_check_article=False, max_topics = 10):
+    def read_articles(self, topics, driver, write_json=False, hard_check_article=False, max_topics = 10, image=False):
 
         articles_by_topic = []
 
@@ -206,6 +207,7 @@ class GoNews():
                     # Get the content of the article 
                     article_title = article.title
                     article_text = article.text
+                    article_image = article.top_image
 
                     # Retrieve the source from the topic dictionary
                     article_source = topics[counter][url]["source"]
@@ -213,7 +215,8 @@ class GoNews():
                     # Append the parsed article content
                     articles_content.append({
                         "content": article_title + '\n' + article_text,
-                        "source": article_source
+                        "source": article_source,
+                        "image": article_image
                     })
                     
                     # Mimic human behavior 

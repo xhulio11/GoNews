@@ -9,6 +9,7 @@ import feedparser
 import json
 import time
 import traceback
+import os 
 
 class GoNews():
     
@@ -30,7 +31,15 @@ class GoNews():
         # example of query: "hl=en-US&gl=US&ceid=US%3Aen" 
         self.query = "hl=" + self.language + "-" + self.country + "&gl=" + self.country + "&ceid=" +self.country + "%3A" + self.language
     
-
+    def open_incremental_file(self, base_name, extension="json"):
+        counter = 0
+        while True: 
+            # Create the filename with a counter
+            filename = f"{base_name}{counter:05d}.{extension}"
+            if not os.path.exists(filename):  # Check if the file exists
+               return filename
+            counter += 1
+            
     def create_url(self, code=None, query_parameter=None):
         
         # Set the proper url based on the selection of Main topics (WORLD, BUISNESS, ...) or sections (POLITICS, SPORTS ..)
@@ -130,27 +139,27 @@ class GoNews():
                 return False
 
             # Keyword filtering (check for terms like "terms of use", "cookies", etc.)
-            disallowed_keywords = [
-                "terms of use", "privacy policy", "cookies", 
-                "about us", "contact us", "login", "sign up"
-            ]
-            if any(keyword.lower() in article.text.lower() for keyword in disallowed_keywords):
-                print("2. Disallowed content keywords found")
-                return False
+            # disallowed_keywords = [
+            #     "terms of use", "privacy policy", "cookies", 
+            #     "about us", "contact us", "login", "sign up"
+            # ]
+            # if any(keyword.lower() in article.text.lower() for keyword in disallowed_keywords):
+            #     print("2. Disallowed content keywords found")
+            #     return False
 
-            # Boilerplate or repetitive content check
-            if len(set(article.text.split())) / len(article.text.split()) < 0.5:
-                print("2. High repetition or boilerplate content detected")
-                return False
+            # # Boilerplate or repetitive content check
+            # if len(set(article.text.split())) / len(article.text.split()) < 0.5:
+            #     print("2. High repetition or boilerplate content detected")
+            #     return False
             
-            # Paragraph structure
-            paragraphs = article.text.split("\n")
-            if len([p for p in paragraphs if len(p.split()) > 10]) < 2:
-                print("2.Insufficient paragraph structure")
-                return False
+            # # Paragraph structure
+            # paragraphs = article.text.split("\n")
+            # if len([p for p in paragraphs if len(p.split()) > 10]) < 2:
+            #     print("2.Insufficient paragraph structure")
+            #     return False
 
             # Media-only check
-            if article.movies and len(article.text) < 100:
+            if article.movies and len(article.text) < 700:
                 print("2.Media-only content")
                 return False
 
@@ -163,7 +172,9 @@ class GoNews():
 
         articles_by_topic = []
 
-        with open('articles.json', 'w', encoding='UTF-8') as file: 
+        filename = self.open_incremental_file("/home/xhulio/Desktop/GoNews/recent_articles/articles")
+
+        with open(filename, 'w', encoding='UTF-8') as file: 
             
             for counter, topic in enumerate(topics):
                 
@@ -171,18 +182,23 @@ class GoNews():
 
                 for url in topic:
 
-                    # Get content using browser 
-                    driver.get(url) 
-
                     try:
-                        # Wait for the page to fully load 
-                        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))  # Wait for the body tag
+                        # Get content using browser 
+                        driver.get(url) 
 
+                        try:# Wait for the page to fully load 
+                            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))  # Wait for the body tag
+                        except:
+                            print("FAILED:", url)
+                            continue
                         # Add a delay to mimic human behavior
                         time.sleep(2) 
 
                         # Get the page source
                         page_content = driver.page_source
+                        
+                        # Get url of the article 
+                        current_url = driver.current_url 
 
                         # Use newspaper3k to parse the article text
                         article = Article('')
@@ -199,10 +215,9 @@ class GoNews():
                         continue 
 
                     except Exception as e:
-                        print(f"An error occurred while loading the page: {e}")
-                        traceback.print_exc()
-                        json.dump(articles_by_topic, file, ensure_ascii=False, )
-                        return 
+                        print(f"An error occurred while loading the page: {e}")   
+                        # traceback.print_exc()
+                        continue 
 
                     # Get the content of the article 
                     article_title = article.title
@@ -215,15 +230,16 @@ class GoNews():
                     # Append the parsed article content
                     articles_content.append({
                         "content": article_title + '\n' + article_text,
+                        "url":current_url,
                         "source": article_source,
                         "image": article_image
                     })
-                    
+                    print("PASSED:",url)
                     # Mimic human behavior 
-                    time.sleep(10)
+                    time.sleep(2)
                                 
                 articles_by_topic.append(articles_content)
-
+                
                 # This counter is used to keep track of max number of news retrieved 
                 counter += 1 
 

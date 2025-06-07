@@ -5,16 +5,16 @@ import sys
 import os
 
 # Add the absolute path of the src directory to sys.path
-sys.path.append(os.path.abspath("/home/xhulio/Desktop/Thesis/GNews/src"))
+sys.path.append(os.path.abspath("/home/xhulio/Desktop/GoNews/src"))
 from google_news_api import *
 
 # Set up Selenium options
 chrome_options = Options()
 
-service = Service('/home/xhulio/Downloads/chromedriver-linux64/chromedriver')  # Path to ChromeDriver
+service = Service('/usr/bin/chromedriver')  # Path to ChromeDriver
 chrome_options.add_argument('--disable-notifications')
-chrome_options.add_argument(r"--user-data-dir=/home/xhulio/.config/google-chrome/")  # Root directory for Chrome user data
-chrome_options.add_argument(r"--profile-directory=Profile 1")  # The profile folder you created
+chrome_options.add_argument(r"--user-data-dir=/home/xhulio/.config/chromium/")  # Root directory for Chrome user data
+chrome_options.add_argument(r"--profile-directory=Profile 2")  # The profile folder you created
 
 # Initialize WebDriver for Chrome 
 driver = webdriver.Chrome(service=service, options=chrome_options)
